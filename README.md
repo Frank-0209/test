@@ -78,7 +78,7 @@ apt-get update && apt-get upgrade && apt-get install -y git
 cd /usr/src
 ```
 ```bash
-git clone https://github.com/hanguyentieuyen/ccaspbx-install.sh.git
+git clone https://github.com/Frank-0209/test2.git
 ```
 ```bash
 chmod 755 -R /usr/src/ccaspbx-install.sh
