@@ -27,16 +27,6 @@
 //includes
 	require_once "root.php";
 	require_once "resources/require.php";
-	require_once "resources/check_auth.php";
-
-//check permissions
-	if (permission_exists('bridge_delete')) {
-		//access granted
-	}
-	else {
-		echo "access denied";
-		exit;
-	}
 
 //add multi-lingual support
 	$language = new text;
@@ -46,7 +36,7 @@
 	messages::add($text['message-delete']);
 
 //delete the data
-	if (isset($_GET["id"]) && is_uuid($_GET["id"])) {
+	if (isset($_GET["id"]) && is_uuid($_GET["id"]) && permission_exists('bridge_delete')) {
 
 		//get the id
 			$id = check_str($_GET["id"]);

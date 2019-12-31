@@ -17,7 +17,7 @@
 
 	The Initial Developer of the Original Code is
 	Mark J Crane <markjcrane@fusionpbx.com>
-	Portions created by the Initial Developer are Copyright (C) 2008-2019
+	Portions created by the Initial Developer are Copyright (C) 2008-2013
 	the Initial Developer. All Rights Reserved.
 
 	Contributor(s):
@@ -39,43 +39,44 @@
 	}
 
 //set the variables
-	$command = $_GET['cmd'];
+	$cmd = check_str($_GET['cmd']);
+	$rdr = check_str($_GET['rdr']);
 
 //create the event socket connection
 	$fp = event_socket_create($_SESSION['event_socket_ip_address'], $_SESSION['event_socket_port'], $_SESSION['event_socket_password']);
 	if ($fp) {
 		//if reloadxml then run reloadacl, reloadxml and rescan the external profile for new gateways
-			if ($command == "api reloadxml") {
+			if ($cmd == "api reloadxml") {
 				//reloadxml
-					if ($command == "api reloadxml") {
-						messages::add(rtrim(event_socket_request($fp, $command)), 'alert');
-						unset($command);
+					if ($cmd == "api reloadxml") {
+						messages::add(rtrim(event_socket_request($fp, $cmd)), 'alert');
+						unset($cmd);
 					}
 
 				//clear the apply settings reminder
 					$_SESSION["reload_xml"] = false;
 
 				//rescan the external profile to look for new or stopped gateways
-					$command = 'api sofia profile external rescan';
-					messages::add(rtrim(event_socket_request($fp, $command)), 'alert');
-					unset($command);
+					$tmp_cmd = 'api sofia profile external rescan';
+					messages::add(rtrim(event_socket_request($fp, $tmp_cmd)), 'alert');
+					unset($tmp_cmd);
 			}
 
 		//cache flush
-			if ($command == "api cache flush") {
+			if ($cmd == "api cache flush") {
 				$cache = new cache;
 				$cache->flush();
 			}
 
 		//reloadacl
-			if ($command == "api reloadacl") {
-				messages::add(rtrim(event_socket_request($fp, $command)), 'alert');
-				unset($command);
+			if ($cmd == "api reloadacl") {
+				messages::add(rtrim(event_socket_request($fp, $cmd)), 'alert');
+				unset($cmd);
 			}
 
 		//sofia profile
-			if (substr($command, 0, 17) == "api sofia profile") {
-				messages::add(rtrim(event_socket_request($fp, $command)), 'alert');
+			if (substr($cmd, 0, 17) == "api sofia profile") {
+				messages::add(rtrim(event_socket_request($fp, $cmd)), 'alert');
 			}
 
 		//close the connection
@@ -83,7 +84,12 @@
 	}
 
 //redirect the user
-	header("Location: sip_status.php");
-
+	if ($rdr == "false") {
+		//redirect false
+		echo $response;
+	}
+	else {
+		header("Location: sip_status.php");
+	}
 
 ?>

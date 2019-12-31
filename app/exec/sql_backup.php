@@ -23,24 +23,16 @@
 	Contributor(s):
 	Mark J Crane <markjcrane@fusionpbx.com>
 */
-
-//disabled
+include "root.php";
+require_once "resources/require.php";
+require_once "resources/check_auth.php";
+if (permission_exists('exec_sql_backup')) {
+	//access granted
+}
+else {
 	echo "access denied";
 	exit;
-
-//includes
-	include "root.php";
-	require_once "resources/require.php";
-	require_once "resources/check_auth.php";
-
-//check permisions
-	if (permission_exists('exec_sql_backup')) {
-		//access granted
-	}
-	else {
-		echo "access denied";
-		exit;
-	}
+}
 
 //add multi-lingual support
 	$language = new text;

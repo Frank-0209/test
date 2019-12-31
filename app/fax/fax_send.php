@@ -982,9 +982,7 @@ if (!$included) {
 				$contact_values[] = $contact_option_value_faxnumber."|".$contact_option_value_recipient;
 				unset($contact_option_label);
 			}
-			if (is_array($contact_labels)) {
-				asort($contact_labels, SORT_NATURAL); // sort by name(s)
-			}
+			asort($contact_labels, SORT_NATURAL); // sort by name(s)
 			echo "	<select class='formfld' style='display: none;' id='fax_recipient_select' onchange='contact_load(this);'>\n";
 			echo "		<option value=''></option>\n";
 			foreach ($contact_labels as $index => $contact_label) {

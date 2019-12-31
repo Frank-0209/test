@@ -119,7 +119,6 @@ class plugin_database {
 			}
 			$result["user_uuid"] = $this->user_uuid;
 			$result["domain_uuid"] = $this->domain_uuid;
-			$result["contact_uuid"] = $this->contact_uuid;
 			$result["sql"] = $sql;
 			if ($user_authorized) {
 				$result["authorized"] = "true";

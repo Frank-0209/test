@@ -311,7 +311,7 @@ include "root.php";
 				$x = 0;
 				if (is_array($result)) foreach ($result as &$row) {
 					if ($x > 0) {
-						$dial_string .= ":_:";
+						$dial_string .= ",";
 					}
 
 					//determine if the destination is a local sip user

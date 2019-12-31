@@ -39,7 +39,7 @@
 	}
 
 //set fav icon
-	$favicon = (isset($_SESSION['theme']['favicon']['text'])) ? escape($_SESSION['theme']['favicon']['text']) : '<!--{project_path}-->/themes/default/favicon.ico';
+	$favicon = (isset($_SESSION['theme']['favicon']['text'])) ? escape($_SESSION['theme']['favicon']['text']) : '<!--{project_path}-->/themes/default/images/faviconccas.ico';
 	echo "<link rel='icon' href='".$favicon."'>\n";
 ?>
 
@@ -211,7 +211,6 @@
 					});
 				});
 		<?php } ?>
-		
 
 	});
 
@@ -327,8 +326,8 @@
 							echo "<span class=\"domain_list_item_description\"> - ".escape($domain['domain_description'])."</span>\n";
 						}
 						echo "</div>\n";
-						$ary_domain_names[] = $domain['domain_name'];
-						$ary_domain_descs[] = str_replace('"','\"',$domain['domain_description']);
+						$ary_domain_names[] = escape($domain['domain_name']);
+						$ary_domain_descs[] = str_replace('"','\"',escape($domain['domain_description']));
 					}
 					?>
 				</div>
@@ -412,9 +411,9 @@
 									$menu_brand_link = '/';
 								}
 							//define menu brand mark
-								$menu_brand_text = ($_SESSION['theme']['menu_brand_text']['text'] != '') ? escape($_SESSION['theme']['menu_brand_text']['text']) : "FusionPBX";
+								$menu_brand_text = ($_SESSION['theme']['menu_brand_text']['text'] != '') ? escape($_SESSION['theme']['menu_brand_text']['text']) : "CCASPBX";
 								if ($_SESSION['theme']['menu_brand_type']['text'] == 'image' || $_SESSION['theme']['menu_brand_type']['text'] == '') {
-									$menu_brand_image = ($_SESSION['theme']['menu_brand_image']['text'] != '') ? escape($_SESSION['theme']['menu_brand_image']['text']) : PROJECT_PATH."/themes/default/images/logo.png";
+									$menu_brand_image = ($_SESSION['theme']['menu_brand_image']['text'] != '') ? escape($_SESSION['theme']['menu_brand_image']['text']) : PROJECT_PATH."/themes/default/images/logoccas.png";
 									echo "<a href='".$menu_brand_link."'>";
 									echo "<img id='menu_brand_image' class='navbar-logo' ".(($menu_style == 'fixed') ? "style='margin-right: -2%;'" : null)." src='".$menu_brand_image."' title=\"".escape($menu_brand_text)."\">";
 									if ($_SESSION['theme']['menu_brand_image_hover']['text'] != '') {
@@ -532,7 +531,7 @@
 					$logo_style = ($_SESSION['theme']['logo_style']['text'] != '') ? $_SESSION['theme']['logo_style']['text'] : '';
 					echo str_replace("center", $logo_align, $open_container);
 					if ($_SERVER['PHP_SELF'] != PROJECT_PATH."/core/install/install.php") {
-						$logo = ($_SESSION['theme']['logo']['text'] != '') ? $_SESSION['theme']['logo']['text'] : PROJECT_PATH."/themes/default/images/logo.png";
+						$logo = ($_SESSION['theme']['logo']['text'] != '') ? $_SESSION['theme']['logo']['text'] : PROJECT_PATH."/themes/default/images/logoccas.png";
 						echo "<a href='".((PROJECT_PATH != '') ? PROJECT_PATH : '/')."'><img src='".$logo."' style='padding: 15px 20px;$logo_style'></a>";
 					}
 
@@ -552,7 +551,7 @@
 				<!--{body}-->
 			</div>
 			<div id='footer'>
-				<span class='footer'><?php echo (isset($_SESSION['theme']['footer']['text'])) ? $_SESSION['theme']['footer']['text'] : "&copy; ".$text['theme-label-copyright']." 2008 - ".date("Y")." <a href='http://www.fusionpbx.com' class='footer' target='_blank'>fusionpbx.com</a> ".$text['theme-label-all_rights_reserved']; ?></span>
+				<span class='footer'><?php echo (isset($_SESSION['theme']['footer']['text'])) ? $_SESSION['theme']['footer']['text'] : "&copy; ".$text['theme-label-copyright']." 2008 - ".date("Y")." <a href='http://www.ccas.vn' class='footer' target='_blank'>ccas.v</a> ".$text['theme-label-all_rights_reserved']; ?></span>
 			</div>
 		</div>
 
@@ -562,14 +561,14 @@
 
 	// default login being used
 	else {
-		$logo = (isset($_SESSION['theme']['logo']['text'])) ? $_SESSION['theme']['logo']['text'] : PROJECT_PATH."/themes/default/images/logo.png";
+		$logo = (isset($_SESSION['theme']['logo']['text'])) ? $_SESSION['theme']['logo']['text'] : PROJECT_PATH."/themes/default/images/logoccas.png";
 		?>
 		<div id='default_login'>
 			<a href='<?php echo PROJECT_PATH; ?>/'><img id='login_logo' src='<?php echo escape($logo); ?>'></a><br />
 			<!--{body}-->
 		</div>
 		<div id='footer_login'>
-			<span class='footer'><?php echo (isset($_SESSION['theme']['footer']['text'])) ? $_SESSION['theme']['footer']['text'] : "&copy; ".$text['theme-label-copyright']." 2008 - ".date("Y")." <a href='http://www.fusionpbx.com' class='footer' target='_blank'>fusionpbx.com</a> ".$text['theme-label-all_rights_reserved']; ?></span>
+			<span class='footer'><?php echo (isset($_SESSION['theme']['footer']['text'])) ? $_SESSION['theme']['footer']['text'] : "&copy; ".$text['theme-label-copyright']." 2008 - ".date("Y")." <a href='http://www.ccas.vn' class='footer' target='_blank'>ccas .vn</a> ".$text['theme-label-all_rights_reserved']; ?></span>
 		</div>
 		<?php
 		unset($_SESSION['background_image']);

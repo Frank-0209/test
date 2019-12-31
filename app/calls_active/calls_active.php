@@ -17,26 +17,22 @@
 
 	The Initial Developer of the Original Code is
 	Mark J Crane <markjcrane@fusionpbx.com>
-	Portions created by the Initial Developer are Copyright (C) 2008-2019
+	Portions created by the Initial Developer are Copyright (C) 2008-2012
 	the Initial Developer. All Rights Reserved.
 
 	Contributor(s):
 	Mark J Crane <markjcrane@fusionpbx.com>
 */
-//includes
-	include "root.php";
-	require_once "resources/require.php";
-	require_once "resources/check_auth.php";
-
-//check permissions
-	if (permission_exists('call_active_view')) {
-		//access granted
-	}
-	else {
-		echo "access denied";
-		exit;
-	}
-
+include "root.php";
+require_once "resources/require.php";
+require_once "resources/check_auth.php";
+if (permission_exists('call_active_view')) {
+	//access granted
+}
+else {
+	echo "access denied";
+	exit;
+}
 //add multi-lingual support
 	$language = new text;
 	$text = $language->get();
@@ -101,7 +97,7 @@
 	//call controls
 		function hangup(uuid) {
 			if (confirm("<?php echo $text['confirm-hangup']?>")) {
-				send_cmd('calls_exec.php?command=hangup&uuid='+uuid);
+				send_cmd('calls_exec.php?cmd=uuid_kill%20'+uuid);
 			}
 		}
 

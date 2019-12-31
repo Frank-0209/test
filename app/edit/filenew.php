@@ -17,104 +17,78 @@
 
 	The Initial Developer of the Original Code is
 	Mark J Crane <markjcrane@fusionpbx.com>
-	Portions created by the Initial Developer are Copyright (C) 2008-2019
+	Portions created by the Initial Developer are Copyright (C) 2008-2012
 	the Initial Developer. All Rights Reserved.
 
 	Contributor(s):
 	Mark J Crane <markjcrane@fusionpbx.com>
 	James Rose <james.o.rose@gmail.com>
 */
-
-//disable this feature
+include "root.php";
+require_once "resources/require.php";
+require_once "resources/check_auth.php";
+if (permission_exists('script_editor_save')) {
+	//access granted
+}
+else {
+	echo "access denied";
 	exit;
-
-//includes
-	include "root.php";
-	require_once "resources/require.php";
-	require_once "resources/check_auth.php";
-
-//check permissions
-	if (permission_exists('script_editor_save')) {
-		//access granted
-	}
-	else {
-		echo "access denied";
-		exit;
-	}
+}
 
 //add multi-lingual support
 	$language = new text;
 	$text = $language->get();
 
-//handle the directory and file
-	$folder = $_REQUEST["folder"];
-	$folder = str_replace ("\\", "/", $folder);
-	if (substr($folder, -1) != "/") { $folder = $folder.'/'; }
-	$file = $_REQUEST["file"];
+$folder = $_GET["folder"];
+$folder = str_replace ("\\", "/", $folder);
+if (substr($folder, -1) != "/") { $folder = $folder.'/'; }
+$file = $_GET["file"];
 
-//write the file or show the html form
-	if (strlen($folder) > 0 && strlen($file) > 0) {
-		//compare the tokens
-		$key_name = '/app/edit/file_new';
-		$hash = hash_hmac('sha256', $key_name, $_SESSION['keys'][$key_name]);
-		if (!hash_equals($hash, $_POST['token'])) {
-			echo "access denied";
-			exit;
-		}
+if (strlen($folder) > 0 && strlen($file) > 0) {
+	//create new file
+	$handle = fopen($folder.$file, 'wb') or die("Error!!");
+	$content = "<?php\n\n?>";
+	fwrite($handle, $content);
+	fclose($handle);
+	header("Location: fileoptions.php");
+}
+else {
+	require_once "header.php";
 
-		//create new file
-		$handle = fopen($folder.$file, 'wb') or die("Error!!");
-		$content = "<?php\n\n?>";
-		fwrite($handle, $content);
-		fclose($handle);
-		header("Location: fileoptions.php");
-	}
-	else {
+	echo "<br>";
+	echo "<div align='left'>";
+	echo "<form method='get' action=''>";
+	echo "<table>";
+	echo "	<tr>";
+	echo "		<td>Path:</td>";
+	echo "	</tr>";
+	echo "	<tr>";
+	echo "		<td>".$folder.$file."</td>";
+	echo "	</tr>";
+	echo "</table>";
 
-		//create a token
-		$key_name = '/app/edit/file_new';
-		$_SESSION['keys'][$key_name] = bin2hex(random_bytes(32));
-		$_SESSION['token'] = hash_hmac('sha256', $key_name, $_SESSION['keys'][$key_name]);
+	echo "<br />";
 
-		//include the header
-		require_once "header.php";
+	echo "<table>";
+	echo "	<tr>";
+	echo "	  <td>".$text['label-file-name']."</td>";
+	echo "	</tr>";
 
-		//show the content
-		echo "<br>";
-		echo "<div align='left'>";
-		echo "<form method='POST' action=''>";
-		echo "<table>";
-		echo "	<tr>";
-		echo "		<td>Path:</td>";
-		echo "	</tr>";
-		echo "	<tr>";
-		echo "		<td>".$folder.$file."</td>";
-		echo "	</tr>";
-		echo "</table>";
+	echo "	<tr>";
+	echo "		<td><input type='text' name='file' value=''></td>";
+	echo "	</tr>";
 
-		echo "<br />";
+	echo "	<tr>";
+	echo "		<td colspan='1' align='right'>";
+	echo "			<input type='hidden' name='folder' value='$folder'>";
+	echo "			<input type='button' value='".$text['button-back']."' onclick='history.back()'><input type='submit' value='".$text['button-new-file']."'>";
+	echo "		</td>";
+	echo "	</tr>";
+	echo "</table>";
+	echo "</form>";
+	echo "</div>";
 
-		echo "<table>";
-		echo "	<tr>";
-		echo "	  <td>".$text['label-file-name']."</td>";
-		echo "	</tr>";
-
-		echo "	<tr>";
-		echo "		<td><input type='text' name='file' value=''></td>";
-		echo "	</tr>";
-
-		echo "	<tr>";
-		echo "		<td colspan='1' align='right'>";
-		echo "			<input type='hidden' name='folder' value='$folder'>";
-		echo "			<input type='hidden' name='token' id='token' value='". $_SESSION['token']. "'>";
-		echo "			<input type='button' value='".$text['button-back']."' onclick='history.back()'><input type='submit' value='".$text['button-new-file']."'>";
-		echo "		</td>";
-		echo "	</tr>";
-		echo "</table>";
-		echo "</form>";
-		echo "</div>";
-
-		require_once "footer.php";
-	}
+	require_once "footer.php";
+}
 
 ?>
