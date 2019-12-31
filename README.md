@@ -81,7 +81,7 @@ cd /usr/src
 git clone https://github.com/Frank-0209/test2.git
 ```
 ```bash
-chmod 755 -R /usr/src/ccaspbx-install.sh
+chmod 755 -R /usr/src/test2
 ```
 ```bash
 cd /usr/src/ccaspbx-install.sh/debian
