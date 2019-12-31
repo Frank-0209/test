@@ -84,7 +84,7 @@ git clone https://github.com/Frank-0209/test2.git
 chmod 755 -R /usr/src/test2
 ```
 ```bash
-cd /usr/src/ccaspbx-install.sh/debian
+cd /usr/src/test2/debian
 ```
 ```bash
 ./install.sh
