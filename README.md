@@ -78,13 +78,13 @@ apt-get update && apt-get upgrade && apt-get install -y git
 cd /usr/src
 ```
 ```bash
-git clone https://github.com/Frank-0209/test.git
+git clone https://github.com/fusionpbx/fusionpbx-install.sh.git
 ```
 ```bash
-chmod 755 -R /usr/src/ccaspbx-install.sh
+chmod 755 -R /usr/src/fusionpbx-install.sh
 ```
 ```bash
-cd /usr/src/ccaspbx-install.sh/debian
+cd /usr/src/fusionpbx-install.sh/debian
 ```
 ```bash
 ./install.sh

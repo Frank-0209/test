@@ -37,17 +37,6 @@
 		$apps[$x]['default_settings'][$y]['default_setting_value'] = "#6c89b5";
 		$apps[$x]['default_settings'][$y]['default_setting_enabled'] = "true";
 		$apps[$x]['default_settings'][$y]['default_setting_description'] = "Set a background color.";
-
-		$y++;
-        $apps[$x]['default_settings'][$y]['default_setting_uuid'] = "b0c60b4f-0c82-47d5-8af8-0d17f8444425";
-        $apps[$x]['default_settings'][$y]['default_setting_category'] = "theme";
-        $apps[$x]['default_settings'][$y]['default_setting_subcategory'] = "background_image";
-        $apps[$x]['default_settings'][$y]['default_setting_name'] = "array";
-        $apps[$x]['default_settings'][$y]['default_setting_value'] = "/themes/default/images/ccas-b4.jpg";
-        $apps[$x]['default_settings'][$y]['default_setting_enabled'] = "true";
-        $apps[$x]['default_settings'][$y]['default_setting_description'] = "Set a background image color.";
-
-
 		$y++;
 		$apps[$x]['default_settings'][$y]['default_setting_uuid'] = "d79fb881-8a1c-4082-9ef9-5ff359186e30";
 		$apps[$x]['default_settings'][$y]['default_setting_category'] = "theme";
@@ -1086,7 +1075,7 @@
 		$apps[$x]['default_settings'][$y]['default_setting_subcategory'] = "login_background_image_enabled";
 		$apps[$x]['default_settings'][$y]['default_setting_name'] = "boolean";
 		$apps[$x]['default_settings'][$y]['default_setting_value'] = "true";
-		$apps[$x]['default_settings'][$y]['default_setting_enabled'] = "true";
+		$apps[$x]['default_settings'][$y]['default_setting_enabled'] = "false";
 		$apps[$x]['default_settings'][$y]['default_setting_description'] = "Enable use of background images on the login page.";
 		$y++;
 		$apps[$x]['default_settings'][$y]['default_setting_uuid'] = "685ac6a3-5f2f-4920-a40b-764e51bf97c4";
